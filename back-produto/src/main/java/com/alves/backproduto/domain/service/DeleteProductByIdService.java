@@ -1,13 +1,10 @@
 package com.alves.backproduto.domain.service;
 
-import com.alves.backproduto.domain.ports.in.DeleteProductByIdUseCase;
-import com.alves.backproduto.domain.ports.out.DeleteProductByIdPort;
-import lombok.AllArgsConstructor;
-import org.springframework.stereotype.Component;
+import com.alves.backproduto.commons.customannotations.UseCase;
+import com.alves.backproduto.application.ports.in.DeleteProductByIdUseCase;
+import com.alves.backproduto.application.ports.out.DeleteProductByIdPort;
 
-import java.lang.annotation.Documented;
-
-@Component
+@UseCase
 public class DeleteProductByIdService implements DeleteProductByIdUseCase {
     private final DeleteProductByIdPort deleteProductByIdPort;
 

@@ -1,2 +1,3 @@
 INSERT INTO product (name, description, quantity)
-VALUES ('Pão', 'Pãp', 5);
+VALUES ('Salgadinho', ' ', 5),
+       ('Refrigerante', ' ', 3);

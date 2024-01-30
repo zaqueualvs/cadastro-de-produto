@@ -1,13 +1,12 @@
 package com.alves.backproduto.domain.service;
 
+import com.alves.backproduto.commons.customannotations.UseCase;
 import com.alves.backproduto.domain.exception.ProductNotFoundException;
 import com.alves.backproduto.domain.model.Product;
-import com.alves.backproduto.domain.ports.in.FindProductByIdUseCase;
-import com.alves.backproduto.domain.ports.out.FindAllProductPort;
-import com.alves.backproduto.domain.ports.out.FindProductByIdPort;
-import org.springframework.stereotype.Component;
+import com.alves.backproduto.application.ports.in.FindProductByIdUseCase;
+import com.alves.backproduto.application.ports.out.FindProductByIdPort;
 
-@Component
+@UseCase
 public class FindProductByIdService implements FindProductByIdUseCase {
 
     private final FindProductByIdPort findProductByIdPort;
