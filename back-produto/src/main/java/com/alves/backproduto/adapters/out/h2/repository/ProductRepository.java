@@ -1,6 +1,6 @@
-package com.alves.backproduto.infrastructure.adapters.out.h2.repository;
+package com.alves.backproduto.adapters.out.h2.repository;
 
-import com.alves.backproduto.infrastructure.adapters.out.h2.entity.ProductEntity;
+import com.alves.backproduto.adapters.out.h2.entity.ProductEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

@@ -1,4 +1,4 @@
-package com.alves.backproduto.infrastructure.adapters.out.h2.entity;
+package com.alves.backproduto.adapters.out.h2.entity;
 
 import jakarta.persistence.*;
 import lombok.*;

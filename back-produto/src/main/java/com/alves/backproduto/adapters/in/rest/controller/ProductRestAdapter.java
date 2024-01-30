@@ -1,8 +1,8 @@
-package com.alves.backproduto.infrastructure.adapters.in.rest.controller;
+package com.alves.backproduto.adapters.in.rest.controller;
 
-import com.alves.backproduto.infrastructure.adapters.in.rest.data.request.ProductRequest;
-import com.alves.backproduto.infrastructure.adapters.in.rest.data.response.ProductResponse;
-import com.alves.backproduto.infrastructure.adapters.in.rest.mapper.ProductRestMapper;
+import com.alves.backproduto.adapters.in.rest.data.request.ProductRequest;
+import com.alves.backproduto.adapters.in.rest.data.response.ProductResponse;
+import com.alves.backproduto.adapters.in.rest.mapper.ProductRestMapper;
 import com.alves.backproduto.application.ports.in.*;
 import com.alves.backproduto.domain.model.Product;
 import jakarta.validation.Valid;

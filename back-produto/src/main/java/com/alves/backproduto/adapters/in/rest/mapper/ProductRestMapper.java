@@ -1,7 +1,7 @@
-package com.alves.backproduto.infrastructure.adapters.in.rest.mapper;
+package com.alves.backproduto.adapters.in.rest.mapper;
 
-import com.alves.backproduto.infrastructure.adapters.in.rest.data.request.ProductRequest;
-import com.alves.backproduto.infrastructure.adapters.in.rest.data.response.ProductResponse;
+import com.alves.backproduto.adapters.in.rest.data.request.ProductRequest;
+import com.alves.backproduto.adapters.in.rest.data.response.ProductResponse;
 import com.alves.backproduto.domain.model.Product;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;

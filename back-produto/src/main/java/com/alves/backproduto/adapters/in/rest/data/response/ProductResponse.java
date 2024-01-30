@@ -1,4 +1,4 @@
-package com.alves.backproduto.infrastructure.adapters.in.rest.data.response;
+package com.alves.backproduto.adapters.in.rest.data.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

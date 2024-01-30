@@ -1,4 +1,4 @@
-package com.alves.backproduto.infrastructure.adapters.in.rest.data.request;
+package com.alves.backproduto.adapters.in.rest.data.request;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;

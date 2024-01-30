@@ -1,16 +1,17 @@
-package com.alves.backproduto.infrastructure.adapters.out.h2.adapters;
+package com.alves.backproduto.adapters.out.h2.adapters;
 
+import com.alves.backproduto.commons.customannotations.PersistenceAdapter;
 import com.alves.backproduto.domain.model.Product;
 import com.alves.backproduto.application.ports.out.FindProductByIdPort;
-import com.alves.backproduto.infrastructure.adapters.out.h2.entity.ProductEntity;
-import com.alves.backproduto.infrastructure.adapters.out.h2.mapper.ProductPersistenceMapper;
-import com.alves.backproduto.infrastructure.adapters.out.h2.repository.ProductRepository;
+import com.alves.backproduto.adapters.out.h2.entity.ProductEntity;
+import com.alves.backproduto.adapters.out.h2.mapper.ProductPersistenceMapper;
+import com.alves.backproduto.adapters.out.h2.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.Optional;
 
-@Component
+@PersistenceAdapter
 public class FindProductByIdAdapter implements FindProductByIdPort {
     @Autowired
     private ProductRepository productRepository;
