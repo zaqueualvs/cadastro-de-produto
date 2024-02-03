@@ -3,6 +3,8 @@ package com.alves.backproduto.domain.service;
 import com.alves.backproduto.commons.customannotations.UseCase;
 import com.alves.backproduto.application.ports.in.DeleteProductByIdUseCase;
 import com.alves.backproduto.application.ports.out.DeleteProductByIdPort;
+import com.alves.backproduto.domain.exception.ProductNotFoundException;
+import org.springframework.dao.EmptyResultDataAccessException;
 
 @UseCase
 public class DeleteProductByIdService implements DeleteProductByIdUseCase {
@@ -14,6 +16,10 @@ public class DeleteProductByIdService implements DeleteProductByIdUseCase {
 
     @Override
     public void deleteById(Long id) {
-        deleteProductByIdPort.deleteById(id);
+        try {
+            deleteProductByIdPort.deleteById(id);
+        } catch (EmptyResultDataAccessException e) {
+            throw new ProductNotFoundException(id);
+        }
     }
 }

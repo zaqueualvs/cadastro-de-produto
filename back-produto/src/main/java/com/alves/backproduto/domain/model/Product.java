@@ -2,7 +2,7 @@ package com.alves.backproduto.domain.model;
 
 import java.util.Objects;
 
-public class Product {
+public class Product  {
     private Long id;
     private String name;
     private Long quantity;
