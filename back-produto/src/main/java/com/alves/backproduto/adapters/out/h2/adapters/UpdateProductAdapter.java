@@ -1,5 +1,6 @@
 package com.alves.backproduto.adapters.out.h2.adapters;
 
+import com.alves.backproduto.adapters.in.rest.mapper.ProductRestMapper;
 import com.alves.backproduto.commons.customannotations.PersistenceAdapter;
 import com.alves.backproduto.domain.model.Product;
 import com.alves.backproduto.application.ports.out.UpdateProductPort;
@@ -21,8 +22,10 @@ public class UpdateProductAdapter implements UpdateProductPort {
     private ProductPersistenceMapper productPersistenceMapper;
 
     @Override
-    public void update(Product product) {
+    public Product update(Product product) {
         ProductEntity productEntity = productPersistenceMapper.toEntity(product);
-        productRepository.save(productEntity);
+        productEntity = productRepository.save(productEntity);
+        product = productPersistenceMapper.toDomain(productEntity);
+        return product;
     }
 }

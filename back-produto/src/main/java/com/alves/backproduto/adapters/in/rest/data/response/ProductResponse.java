@@ -16,6 +16,5 @@ import java.io.Serializable;
 public class ProductResponse extends RepresentationModel<ProductResponse> implements Serializable {
     private Long id;
     private String name;
-    private Long quantity;
     private String description;
 }

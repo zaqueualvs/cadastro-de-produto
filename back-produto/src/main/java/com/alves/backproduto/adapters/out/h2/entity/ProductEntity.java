@@ -14,6 +14,5 @@ public class ProductEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
-    private Long quantity;
     private String description;
 }

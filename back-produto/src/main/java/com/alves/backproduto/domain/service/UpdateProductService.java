@@ -15,7 +15,7 @@ public class UpdateProductService implements UpdateProductUseCase {
     }
 
     @Override
-    public void update(Product product) {
-        updateProductPort.update(product);
+    public Product update(Product product) {
+        return updateProductPort.update(product);
     }
 }

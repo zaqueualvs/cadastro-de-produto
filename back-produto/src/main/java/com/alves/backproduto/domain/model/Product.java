@@ -5,16 +5,14 @@ import java.util.Objects;
 public class Product  {
     private Long id;
     private String name;
-    private Long quantity;
     private String description;
 
     public Product() {
     }
 
-    public Product(Long id, String name, Long quantity, String description) {
+    public Product(Long id, String name, String description) {
         this.id = id;
         this.name = name;
-        this.quantity = quantity;
         this.description = description;
     }
 
@@ -32,14 +30,6 @@ public class Product  {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public Long getQuantity() {
-        return quantity;
-    }
-
-    public void setQuantity(Long quantity) {
-        this.quantity = quantity;
     }
 
     public String getDescription() {

@@ -1,3 +1,3 @@
-INSERT INTO product (name, description, quantity)
-VALUES ('Salgadinho', ' ', 5),
-       ('Refrigerante', ' ', 3);
+INSERT INTO product (name, description)
+VALUES ('Salgadinho', ' '),
+       ('Refrigerante', ' ');

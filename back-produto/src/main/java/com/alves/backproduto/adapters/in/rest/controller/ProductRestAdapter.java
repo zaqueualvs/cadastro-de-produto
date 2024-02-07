@@ -78,9 +78,10 @@ public class ProductRestAdapter {
     public ResponseEntity<ProductResponse> update(@PathVariable Long id,
                                                   @RequestBody @Valid ProductRequest productRequest) {
         Product product = findProductByIdUseCase.findById(id);
-        Product productIn = productRestMapper.toDomain(productRequest);
-        BeanUtils.copyProperties(productIn, product, "id");
-        updateProductUseCase.update(productIn);
-        return ResponseEntity.status(HttpStatus.NO_CONTENT).body(productRestMapper.toResponse(productIn));
+        Product productReq = productRestMapper.toDomain(productRequest);
+        BeanUtils.copyProperties(productReq, product, "id");
+        product = updateProductUseCase.update(product);
+        ProductResponse productResponse = productRestMapper.toResponse(product);
+        return ResponseEntity.status(HttpStatus.OK).body(productResponse);
     }
 }

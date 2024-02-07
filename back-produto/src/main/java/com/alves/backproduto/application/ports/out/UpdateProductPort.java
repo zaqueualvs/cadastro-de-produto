@@ -4,5 +4,5 @@ import com.alves.backproduto.domain.model.Product;
 
 public interface UpdateProductPort {
 
-    void update(Product product);
+    Product update(Product product);
 }

@@ -15,8 +15,5 @@ import lombok.Setter;
 public class ProductRequest {
     @NotBlank
     private String name;
-    @NotNull
-    @PositiveOrZero
-    private Long quantity;
     private String description;
 }
