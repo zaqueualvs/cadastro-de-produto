@@ -1,6 +1,6 @@
-package com.alves.backproduto.adapters.out.h2.mapper;
+package com.alves.backproduto.adapters.out.databases.h2.mapper;
 
-import com.alves.backproduto.adapters.out.h2.entity.ProductEntity;
+import com.alves.backproduto.adapters.out.databases.h2.entity.ProductEntity;
 import com.alves.backproduto.domain.model.Product;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;

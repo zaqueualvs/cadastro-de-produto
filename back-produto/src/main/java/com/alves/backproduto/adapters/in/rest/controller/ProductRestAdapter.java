@@ -5,6 +5,8 @@ import com.alves.backproduto.adapters.in.rest.data.response.ProductResponse;
 import com.alves.backproduto.adapters.in.rest.mapper.ProductRestMapper;
 import com.alves.backproduto.application.ports.in.*;
 import com.alves.backproduto.domain.model.Product;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +22,7 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 @RestController
 @RequestMapping("/products")
+@Tag(name = "product-rest")
 public class ProductRestAdapter {
 
     @Autowired
@@ -36,6 +39,7 @@ public class ProductRestAdapter {
     private ProductRestMapper productRestMapper;
 
 
+    @Operation(description = "Cadastra um produto")
     @PostMapping
     public ResponseEntity<ProductResponse> create(
             @RequestBody @Valid ProductRequest productRequest) {
@@ -48,6 +52,7 @@ public class ProductRestAdapter {
         return ResponseEntity.status(HttpStatus.CREATED).body(productResponse);
     }
 
+    @Operation(description = "Busca todos os produtos")
     @GetMapping
     public ResponseEntity<List<ProductResponse>> findAll() {
         List<Product> products = findAllProductUseCase.findAll();
@@ -59,6 +64,7 @@ public class ProductRestAdapter {
         return ResponseEntity.status(HttpStatus.OK).body(productResponses);
     }
 
+    @Operation(description = "Busca um produto por Id")
     @GetMapping("/{id}")
     public ResponseEntity<ProductResponse> findById(@PathVariable Long id) {
         Product product = findProductByIdUseCase.findById(id);
@@ -68,12 +74,14 @@ public class ProductRestAdapter {
         return ResponseEntity.status(HttpStatus.OK).body(productResponse);
     }
 
+    @Operation(description = "Remove um produto por Id")
     @DeleteMapping("/{id}")
     public ResponseEntity<Object> delete(@PathVariable Long id) {
         deleteProductByIdUseCase.deleteById(id);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 
+    @Operation(description = "Atualiza um produto")
     @PutMapping("/{id}")
     public ResponseEntity<ProductResponse> update(@PathVariable Long id,
                                                   @RequestBody @Valid ProductRequest productRequest) {
@@ -82,6 +90,8 @@ public class ProductRestAdapter {
         BeanUtils.copyProperties(productReq, product, "id");
         product = updateProductUseCase.update(product);
         ProductResponse productResponse = productRestMapper.toResponse(product);
+        Link linkAll = linkTo(methodOn(ProductRestAdapter.class).findAll()).withRel("Product List");
+        productResponse.add(linkAll);
         return ResponseEntity.status(HttpStatus.OK).body(productResponse);
     }
 }
