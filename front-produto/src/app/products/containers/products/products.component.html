@@ -1,0 +1,17 @@
+<mat-card>
+  <mat-toolbar color="primary">
+    <span>Produtos cadastrados</span>
+  </mat-toolbar>
+
+  @if (products$ | async; as products) {
+
+    <app-products-list
+      [products]="products.products"
+    >
+    </app-products-list>
+  } @else {
+    <div>
+      ooo
+    </div>
+  }
+</mat-card>
