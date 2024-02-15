@@ -1,1 +1,48 @@
-<p>products-list works!</p>
+<div class="mat-elevation-z8">
+  <mat-table [dataSource]="products">
+
+    <ng-container matColumnDef="id">
+      <mat-header-cell *matHeaderCellDef> Id</mat-header-cell>
+      <mat-cell *matCellDef="let product"> {{ product.id }}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="name">
+      <mat-header-cell *matHeaderCellDef> Nome</mat-header-cell>
+      <mat-cell *matCellDef="let product"> {{ product.name }}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="description">
+      <mat-header-cell *matHeaderCellDef> Descrição</mat-header-cell>
+      <mat-cell *matCellDef="let product"> {{ product.description }}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="action">
+      <mat-header-cell *matHeaderCellDef>
+        <button
+          mat-mini-fab
+          (click)="onAdd()">
+          <mat-icon color="primary">add</mat-icon>
+        </button>
+      </mat-header-cell>
+
+      <mat-cell *matCellDef="let product">
+        <button mat-mini-fab>
+          <mat-icon>edit</mat-icon>
+        </button>
+        <button mat-mini-fab>
+          <mat-icon color="primary">delete</mat-icon>
+        </button>
+      </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </mat-table>
+
+
+  <mat-paginator [pageSizeOptions]="[5, 10, 20]"
+                 showFirstLastButtons
+                 aria-label="Select page of periodic elements">
+  </mat-paginator>
+
+</div>

@@ -4,5 +4,5 @@ import com.alves.backproduto.domain.model.ProductPage;
 
 public interface PagedSearchPort {
 
-    ProductPage PagedSearch(Long page, Long pageSize);
+    ProductPage PagedSearch(Integer page, Integer pageSize);
 }

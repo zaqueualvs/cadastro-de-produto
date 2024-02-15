@@ -1,13 +1,16 @@
 package com.alves.backproduto.adapters.in.rest.controller;
 
 import com.alves.backproduto.adapters.in.rest.data.request.ProductRequest;
+import com.alves.backproduto.adapters.in.rest.data.response.ProductPageResponse;
 import com.alves.backproduto.adapters.in.rest.data.response.ProductResponse;
 import com.alves.backproduto.adapters.in.rest.mapper.ProductRestMapper;
 import com.alves.backproduto.application.ports.in.*;
 import com.alves.backproduto.domain.model.Product;
+import com.alves.backproduto.domain.model.ProductPage;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.PositiveOrZero;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.Link;
@@ -21,7 +24,7 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 @RestController
-@RequestMapping("/products")
+@RequestMapping("/api/products")
 @Tag(name = "product-rest")
 public class ProductRestAdapter {
 
@@ -35,6 +38,8 @@ public class ProductRestAdapter {
     private FindProductByIdUseCase findProductByIdUseCase;
     @Autowired
     private UpdateProductUseCase updateProductUseCase;
+    @Autowired
+    private PagedSearchUseCase pagedSearchUseCase;
     @Autowired
     private ProductRestMapper productRestMapper;
 
@@ -62,6 +67,21 @@ public class ProductRestAdapter {
             productResponse.add(linkById);
         }
         return ResponseEntity.status(HttpStatus.OK).body(productResponses);
+    }
+
+    @Operation(description = "Busca paginada de produtos")
+    @GetMapping("/page")
+    public ResponseEntity<ProductPageResponse> findProductPage(
+            @RequestParam(defaultValue = "0") @PositiveOrZero Integer page,
+            @RequestParam(defaultValue = "2") @PositiveOrZero Integer pageSize
+    ) {
+        ProductPage productPage = pagedSearchUseCase.PagedSearch(page, pageSize);
+        ProductPageResponse productPageResponse = productRestMapper.toProductPageResponse(productPage);
+        for (ProductResponse productResponse : productPageResponse.getProducts()) {
+            Link linkById = linkTo(methodOn(ProductRestAdapter.class).findById(productResponse.getId())).withSelfRel();
+            productResponse.add(linkById);
+        }
+        return ResponseEntity.status(HttpStatus.OK).body(productPageResponse);
     }
 
     @Operation(description = "Busca um produto por Id")

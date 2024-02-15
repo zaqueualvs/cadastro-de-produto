@@ -28,6 +28,7 @@ export class ProductsComponent implements OnInit {
   pageSize = 5;
 
   constructor(private productService: ProductService) {
+    this.refresh();
   }
 
   ngOnInit(): void {
@@ -37,9 +38,15 @@ export class ProductsComponent implements OnInit {
     this.products$ = this.productService.list(pageEvent.pageIndex, pageEvent.pageSize)
       .pipe(
         tap(() => {
+
           this.pageIndex = pageEvent.pageIndex;
           this.pageSize = pageEvent.pageSize;
-        })
+        }),
+        tap(
+          a => {
+            console.log(a.products)
+          }
+        ),
       );
   }
 
