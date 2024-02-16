@@ -1,0 +1,15 @@
+<mat-card class="card-principal">
+  <mat-toolbar color="primary" class="title">
+    <span>Detalhes</span>
+  </mat-toolbar>
+  <mat-card class="card-secondary" [formGroup]="form">
+    <mat-form-field class="example-full-width">
+      <mat-label>Nome</mat-label>
+      <input matInput formControlName="name">
+    </mat-form-field>
+    <mat-form-field class="example-full-width">
+      <mat-label>Descrição</mat-label>
+      <input matInput formControlName="description">
+    </mat-form-field>
+  </mat-card>
+</mat-card>

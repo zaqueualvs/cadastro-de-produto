@@ -1,7 +1,7 @@
-import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { RouterOutlet } from '@angular/router';
-import {MatToolbar, MatToolbarModule} from '@angular/material/toolbar';
+import {Component} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {RouterOutlet} from '@angular/router';
+import {MatToolbar} from '@angular/material/toolbar';
 
 @Component({
   selector: 'app-root',

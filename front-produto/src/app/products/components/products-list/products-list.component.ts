@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core';
+import {Component, Input, Output, EventEmitter} from '@angular/core';
 import {Product} from "../../model/product";
 import {MatPaginator} from "@angular/material/paginator";
 import {MatHeaderRow, MatRow, MatTable, MatTableModule} from "@angular/material/table";
@@ -14,8 +14,8 @@ import {MatButtonModule} from "@angular/material/button";
     MatHeaderRow,
     MatRow,
     MatTableModule,
-    MatButtonModule,
-    MatIconModule
+    MatIconModule,
+    MatButtonModule
 
   ],
   templateUrl: './products-list.component.html',
@@ -23,10 +23,26 @@ import {MatButtonModule} from "@angular/material/button";
 })
 export class ProductsListComponent {
   @Input() products: Product[] = [];
+  @Output() add: EventEmitter<any> = new EventEmitter(false)
+  @Output() detail: EventEmitter<Product> = new EventEmitter(false)
+  @Output() edit: EventEmitter<Product> = new EventEmitter(false)
+  @Output() remove: EventEmitter<Product> = new EventEmitter(false)
 
   readonly displayedColumns = ['id', 'name', 'description', 'action'];
 
   onAdd() {
-    console.log("add ")
+    this.add.emit(false);
+  }
+
+  onEdit(product: Product) {
+    this.edit.emit(product);
+  }
+
+  onDelete(product: Product) {
+    this.remove.emit(product);
+  }
+
+  onDetail(product: Product) {
+    this.detail.emit(product);
   }
 }

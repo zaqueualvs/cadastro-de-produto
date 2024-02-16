@@ -1,5 +1,5 @@
 <mat-card>
-  <mat-toolbar color="primary">
+  <mat-toolbar color="primary" class="title">
     <span>Produtos cadastrados</span>
   </mat-toolbar>
 
@@ -7,11 +7,14 @@
 
     <app-products-list
       [products]="products.products"
+      (add)="onAdd()"
+      (remove)="onDelete($event)"
+      (detail)="onDetail($event)"
     >
     </app-products-list>
   } @else {
-    <div>
-      oooaAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+    <div class="load-spinner">
+      <mat-spinner></mat-spinner>
     </div>
   }
 </mat-card>

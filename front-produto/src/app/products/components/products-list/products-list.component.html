@@ -8,8 +8,14 @@
 
     <ng-container matColumnDef="name">
       <mat-header-cell *matHeaderCellDef> Nome</mat-header-cell>
-      <mat-cell *matCellDef="let product"> {{ product.name }}</mat-cell>
+      <mat-cell *matCellDef="let product">
+        <button mat-button color="primary" (click)="onDetail(product)">
+          {{ product.name }}
+        </button>
+      </mat-cell>
+
     </ng-container>
+
 
     <ng-container matColumnDef="description">
       <mat-header-cell *matHeaderCellDef> Descrição</mat-header-cell>
@@ -21,16 +27,16 @@
         <button
           mat-mini-fab
           (click)="onAdd()">
-          <mat-icon color="primary">add</mat-icon>
+          <mat-icon>add</mat-icon>
         </button>
       </mat-header-cell>
 
       <mat-cell *matCellDef="let product">
-        <button mat-mini-fab>
-          <mat-icon>edit</mat-icon>
+        <button mat-icon-button (click)="onEdit(product)">
+          <mat-icon color="primary">edit</mat-icon>
         </button>
-        <button mat-mini-fab>
-          <mat-icon color="primary">delete</mat-icon>
+        <button mat-icon-button (click)="onDelete(product)">
+          <mat-icon color="warn">delete</mat-icon>
         </button>
       </mat-cell>
     </ng-container>

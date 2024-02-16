@@ -7,6 +7,9 @@ import {ProductPage} from "../../model/product-page";
 import {PageEvent} from "@angular/material/paginator";
 import {ProductService} from "../../services/product.service";
 import {AsyncPipe} from "@angular/common";
+import {MatProgressSpinner} from "@angular/material/progress-spinner";
+import {Product} from "../../model/product";
+import {ActivatedRoute, Router} from "@angular/router";
 
 @Component({
   selector: 'app-products',
@@ -15,7 +18,8 @@ import {AsyncPipe} from "@angular/common";
     MatToolbar,
     ProductsListComponent,
     MatCard,
-    AsyncPipe
+    AsyncPipe,
+    MatProgressSpinner
   ],
   templateUrl: './products.component.html',
   styleUrl: './products.component.scss'
@@ -27,7 +31,11 @@ export class ProductsComponent implements OnInit {
   pageIndex = 0;
   pageSize = 5;
 
-  constructor(private productService: ProductService) {
+  constructor(
+    private productService: ProductService,
+    private router: Router,
+    private route: ActivatedRoute
+  ) {
     this.refresh();
   }
 
@@ -42,12 +50,20 @@ export class ProductsComponent implements OnInit {
           this.pageIndex = pageEvent.pageIndex;
           this.pageSize = pageEvent.pageSize;
         }),
-        tap(
-          a => {
-            console.log(a.products)
-          }
-        ),
       );
+  }
+
+  onAdd() {
+  }
+
+  onDelete(product: Product) {
+    this.productService.delete(product.id).subscribe(
+      () => this.refresh()
+    );
+  }
+
+  onDetail(product: Product) {
+    this.router.navigate(['detail', product.id], {relativeTo: this.route});
   }
 
 }
