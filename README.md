@@ -1,7 +1,7 @@
 # simple-hexagonal-architecture
 Um mini projeto para praticar arquitetura hexagonal feito a partir da leitura do livro Get your hands dirty on clean architecture.
 
-Depois de feito resolvi fazer um frontend para para a api com Angular,
+Depois de feito resolvi fazer um frontend para a api com Angular,
 para roda o projeto angular use o comando [npm run start].
 
 A api é documentada com swagger.
