@@ -2,10 +2,13 @@
   <mat-toolbar color="primary" class="title">
     <span>Detalhes</span>
   </mat-toolbar>
-  <mat-card-header>
+  <mat-card-header class="name">
+    <mat-card-subtitle class="subtitle">Nome</mat-card-subtitle>
     <mat-card-title>{{ product.name }}</mat-card-title>
   </mat-card-header>
-  <mat-card-content>
+  <mat-divider></mat-divider>
+  <mat-card-content class="description">
+    <mat-card-subtitle>Descrição</mat-card-subtitle>
     <p>{{ product.description }}</p>
     <mat-divider></mat-divider>
   </mat-card-content>

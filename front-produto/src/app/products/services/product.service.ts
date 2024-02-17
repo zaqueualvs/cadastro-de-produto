@@ -16,14 +16,6 @@ export class ProductService {
 
   }
 
-  save(product: Partial<Product>) {
-    if (product.id) {
-      return this.update(product)
-    } else {
-      return this.create(product)
-    }
-  }
-
   list(page = 0, pageSize = 5) {
     return this.httpClient.get<ProductPage>(`${this.API}/page`, {params: {page, pageSize}})
   }
@@ -32,8 +24,8 @@ export class ProductService {
     return this.httpClient.get<Product>(`${this.API}/${id}`)
   }
 
-  update(product: Partial<Product>) {
-    return this.httpClient.put<Product>(`${this.API}/${product.id}`, product)
+  update(id: string ,product: Partial<Product>) {
+    return this.httpClient.put<Product>(`${this.API}/${id}`, product)
   }
 
   delete(id: string) {

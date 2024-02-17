@@ -6,9 +6,10 @@ import {MatToolbarModule} from "@angular/material/toolbar";
 import {MatInputModule} from "@angular/material/input";
 import {MatButtonModule} from "@angular/material/button";
 import {ActivatedRoute, Router} from "@angular/router";
-import {FormGroup, NonNullableFormBuilder, ReactiveFormsModule} from "@angular/forms";
+import {FormGroup, NonNullableFormBuilder, ReactiveFormsModule, Validators} from "@angular/forms";
 import {Product} from "../../model/product";
 import {ProductService} from "../../services/product.service";
+import {MatSnackBar} from "@angular/material/snack-bar";
 
 @Component({
   selector: 'app-product-form',
@@ -33,14 +34,16 @@ export class ProductFormComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     private formBuilder: NonNullableFormBuilder,
-    private service: ProductService
+    private service: ProductService,
+    private snackBar: MatSnackBar
   ) {
   }
 
   ngOnInit(): void {
     const product: Product = this.route.snapshot.data['product']
     this.form = this.formBuilder.group({
-      name: [product.name],
+      id: [product.id],
+      name: [product.name, [Validators.required, Validators.minLength(3)]],
       description: [product.description]
     })
   }
@@ -50,8 +53,25 @@ export class ProductFormComponent implements OnInit {
   }
 
   onSubmit() {
-    if (this.form) {
-      this.service.save(this.form.value).subscribe()
+    if (this.form.valid) {
+      const id = this.form.value.id;
+      this.form.removeControl('id')
+      this.save(id, this.form.value).subscribe(
+        result => this.onSuccess()
+      )
     }
+  }
+
+  private save(id: string, product: Partial<Product>) {
+    if (id) {
+      return this.service.update(id, product)
+    } else {
+      return this.service.create(product)
+    }
+  }
+
+  private onSuccess() {
+    this.snackBar.open('Produto salvo com sucesso!', '', {duration: 5000});
+    this.onCancel();
   }
 }
