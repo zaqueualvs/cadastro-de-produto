@@ -1,11 +1,13 @@
 import {Component, OnInit} from '@angular/core';
-import {MatCard} from "@angular/material/card";
+import {MatCard, MatCardModule} from "@angular/material/card";
 import {MatToolbar} from "@angular/material/toolbar";
 import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatInput} from "@angular/material/input";
-import {Form, FormGroup, NonNullableFormBuilder, ReactiveFormsModule} from "@angular/forms";
+import {NonNullableFormBuilder, ReactiveFormsModule} from "@angular/forms";
 import {Product} from "../../model/product";
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
+import {MatButtonModule} from "@angular/material/button";
+import {MatDivider} from "@angular/material/divider";
 
 @Component({
   selector: 'app-product-detail',
@@ -15,25 +17,29 @@ import {ActivatedRoute} from "@angular/router";
     MatToolbar,
     MatFormFieldModule,
     MatInput,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatButtonModule,
+    MatCardModule,
+    MatDivider
   ],
   templateUrl: './product-detail.component.html',
   styleUrl: './product-detail.component.scss'
 })
 export class ProductDetailComponent implements OnInit {
-  form!: FormGroup;
+  product! : Product
 
   constructor(
     private route: ActivatedRoute,
-    private formBuilder: NonNullableFormBuilder
+    private formBuilder: NonNullableFormBuilder,
+    private router: Router
   ) {
   }
 
   ngOnInit(): void {
-    const product: Product = this.route.snapshot.data['product'];
-    this.form = this.formBuilder.group({
-      name: [product.name],
-      description: [product.description],
-    })
+    this.product = this.route.snapshot.data['product'];
+  }
+
+  backPage() {
+    this.router.navigate([''], {relativeTo: this.route})
   }
 }

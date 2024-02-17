@@ -1,1 +1,22 @@
-<p>product-form works!</p>
+<mat-card class="card-principal">
+  <mat-toolbar class="title" color="primary">
+    <span>Produto</span>
+  </mat-toolbar>
+  <form [formGroup]="form" class="input">
+    <mat-form-field appearance="outline">
+      <mat-label>Nome</mat-label>
+      <input matInput placeholder="Ex: Sapato" formControlName="name">
+      <mat-icon matSuffix>category</mat-icon>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Descrição</mat-label>
+      <textarea matInput formControlName="description"></textarea>
+    </mat-form-field>
+  </form>
+  <section class="buttons">
+    <button mat-raised-button color="primary">Salvar</button>
+    <button mat-raised-button color="warn" class="btn-space" (click)="onCancel()">
+      Cancelar
+    </button>
+  </section>
+</mat-card>

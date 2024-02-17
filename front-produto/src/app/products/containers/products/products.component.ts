@@ -1,10 +1,10 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {MatToolbar} from "@angular/material/toolbar";
 import {ProductsListComponent} from "../../components/products-list/products-list.component";
 import {MatCard} from "@angular/material/card";
 import {Observable, tap} from "rxjs";
 import {ProductPage} from "../../model/product-page";
-import {PageEvent} from "@angular/material/paginator";
+import {MatPaginator, MatPaginatorIntl, PageEvent} from "@angular/material/paginator";
 import {ProductService} from "../../services/product.service";
 import {AsyncPipe} from "@angular/common";
 import {MatProgressSpinner} from "@angular/material/progress-spinner";
@@ -19,15 +19,16 @@ import {ActivatedRoute, Router} from "@angular/router";
     ProductsListComponent,
     MatCard,
     AsyncPipe,
-    MatProgressSpinner
+    MatProgressSpinner,
+    MatPaginator,
   ],
   templateUrl: './products.component.html',
   styleUrl: './products.component.scss'
 })
-export class ProductsComponent implements OnInit {
+export class ProductsComponent {
 
   products$: Observable<ProductPage> | null = null
-
+  @ViewChild(MatPaginator) paginator!: MatPaginator
   pageIndex = 0;
   pageSize = 5;
 
@@ -37,9 +38,6 @@ export class ProductsComponent implements OnInit {
     private route: ActivatedRoute
   ) {
     this.refresh();
-  }
-
-  ngOnInit(): void {
   }
 
   refresh(pageEvent: PageEvent = {length: 0, pageIndex: 0, pageSize: 5}) {
@@ -54,6 +52,11 @@ export class ProductsComponent implements OnInit {
   }
 
   onAdd() {
+    this.router.navigate(['new'], {relativeTo: this.route})
+  }
+
+  onEdit(product: Product) {
+    this.router.navigate(['edit', product.id], {relativeTo: this.route});
   }
 
   onDelete(product: Product) {
