@@ -6,19 +6,14 @@ import com.alves.backproduto.adapters.out.databases.h2.repository.ProductReposit
 import com.alves.backproduto.application.ports.out.CreateProductPort;
 import com.alves.backproduto.commons.customannotations.PersistenceAdapter;
 import com.alves.backproduto.domain.model.Product;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 
 @PersistenceAdapter
-@AllArgsConstructor
-@NoArgsConstructor
+@RequiredArgsConstructor
 public class CreateProductAdapter implements CreateProductPort {
 
-    @Autowired
-    private ProductRepository productRepository;
-    @Autowired
-    private ProductPersistenceMapper productPersistenceMapper;
+    private final ProductRepository productRepository;
+    private final ProductPersistenceMapper productPersistenceMapper;
 
     @Override
     public Product createProduct(Product product) {

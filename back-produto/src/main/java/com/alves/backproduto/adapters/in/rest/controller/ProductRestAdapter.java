@@ -11,8 +11,8 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.PositiveOrZero;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.BeanUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.Link;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,24 +25,17 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 @RestController
 @RequestMapping("/api/products")
+@RequiredArgsConstructor
 @Tag(name = "product-rest")
 public class ProductRestAdapter {
 
-    @Autowired
-    private CreateProductUseCase createProductUseCase;
-    @Autowired
-    private FindAllProductUseCase findAllProductUseCase;
-    @Autowired
-    private DeleteProductByIdUseCase deleteProductByIdUseCase;
-    @Autowired
-    private FindProductByIdUseCase findProductByIdUseCase;
-    @Autowired
-    private UpdateProductUseCase updateProductUseCase;
-    @Autowired
-    private PagedSearchUseCase pagedSearchUseCase;
-    @Autowired
-    private ProductRestMapper productRestMapper;
-
+    private final DeleteProductByIdUseCase deleteProductByIdUseCase;
+    private final FindProductByIdUseCase findProductByIdUseCase;
+    private final FindAllProductUseCase findAllProductUseCase;
+    private final CreateProductUseCase createProductUseCase;
+    private final UpdateProductUseCase updateProductUseCase;
+    private final PagedSearchUseCase pagedSearchUseCase;
+    private final ProductRestMapper productRestMapper;
 
     @Operation(description = "Cadastra um produto")
     @PostMapping
@@ -73,7 +66,7 @@ public class ProductRestAdapter {
     @GetMapping("/page")
     public ResponseEntity<ProductPageResponse> findProductPage(
             @RequestParam(defaultValue = "0") @PositiveOrZero Integer page,
-            @RequestParam(defaultValue = "2") @PositiveOrZero Integer pageSize
+            @RequestParam(defaultValue = "5") @PositiveOrZero Integer pageSize
     ) {
         ProductPage productPage = pagedSearchUseCase.PagedSearch(page, pageSize);
         ProductPageResponse productPageResponse = productRestMapper.toProductPageResponse(productPage);
@@ -106,8 +99,7 @@ public class ProductRestAdapter {
     public ResponseEntity<ProductResponse> update(@PathVariable Long id,
                                                   @RequestBody @Valid ProductRequest productRequest) {
         Product product = findProductByIdUseCase.findById(id);
-        Product productReq = productRestMapper.toDomain(productRequest);
-        BeanUtils.copyProperties(productReq, product, "id");
+        BeanUtils.copyProperties(productRequest, product, "id");
         product = updateProductUseCase.update(product);
         ProductResponse productResponse = productRestMapper.toResponse(product);
         Link linkAll = linkTo(methodOn(ProductRestAdapter.class).findAll()).withRel("Product List");

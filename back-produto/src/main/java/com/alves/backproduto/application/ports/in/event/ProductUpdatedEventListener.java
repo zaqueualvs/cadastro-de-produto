@@ -4,5 +4,5 @@ import com.alves.backproduto.domain.event.ProductUpdatedEvent;
 
 public interface ProductUpdatedEventListener {
 
-    void publisheEvent(ProductUpdatedEvent event);
+    void handle(ProductUpdatedEvent event);
 }

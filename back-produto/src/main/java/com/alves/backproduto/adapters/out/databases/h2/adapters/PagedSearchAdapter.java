@@ -7,7 +7,7 @@ import com.alves.backproduto.application.ports.out.PagedSearchPort;
 import com.alves.backproduto.commons.customannotations.PersistenceAdapter;
 import com.alves.backproduto.domain.model.Product;
 import com.alves.backproduto.domain.model.ProductPage;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 
@@ -15,12 +15,11 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @PersistenceAdapter
+@RequiredArgsConstructor
 public class PagedSearchAdapter implements PagedSearchPort {
 
-    @Autowired
-    private ProductRepository productRepository;
-    @Autowired
-    private ProductPersistenceMapper productPersistenceMapper;
+    private final ProductRepository productRepository;
+    private final ProductPersistenceMapper productPersistenceMapper;
 
     @Override
     public ProductPage PagedSearch(Integer page, Integer pageSize) {

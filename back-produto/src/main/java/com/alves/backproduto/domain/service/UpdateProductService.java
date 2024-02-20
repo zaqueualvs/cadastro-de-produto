@@ -1,21 +1,24 @@
 package com.alves.backproduto.domain.service;
 
-import com.alves.backproduto.commons.customannotations.UseCase;
-import com.alves.backproduto.domain.model.Product;
 import com.alves.backproduto.application.ports.in.UpdateProductUseCase;
 import com.alves.backproduto.application.ports.out.UpdateProductPort;
+import com.alves.backproduto.application.ports.out.event.ProductUpdatedEventPublisher;
+import com.alves.backproduto.commons.customannotations.UseCase;
+import com.alves.backproduto.domain.event.ProductUpdatedEvent;
+import com.alves.backproduto.domain.model.Product;
+import lombok.RequiredArgsConstructor;
 
 @UseCase
+@RequiredArgsConstructor
 public class UpdateProductService implements UpdateProductUseCase {
 
     private final UpdateProductPort updateProductPort;
-
-    public UpdateProductService(UpdateProductPort updateProductPort) {
-        this.updateProductPort = updateProductPort;
-    }
+    private final ProductUpdatedEventPublisher productUpdatedEventPublisher;
 
     @Override
     public Product update(Product product) {
-        return updateProductPort.update(product);
+        updateProductPort.update(product);
+        productUpdatedEventPublisher.publisheEvent(new ProductUpdatedEvent(product.getId()));
+        return product;
     }
 }

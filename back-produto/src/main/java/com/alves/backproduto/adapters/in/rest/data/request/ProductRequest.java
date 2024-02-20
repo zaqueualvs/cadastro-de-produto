@@ -1,5 +1,6 @@
 package com.alves.backproduto.adapters.in.rest.data.request;
 
+import com.alves.backproduto.adapters.in.rest.controller.ProductRestAdapter;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.PositiveOrZero;

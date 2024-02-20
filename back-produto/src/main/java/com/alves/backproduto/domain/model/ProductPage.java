@@ -1,7 +1,5 @@
 package com.alves.backproduto.domain.model;
 
-import lombok.Setter;
-
 import java.util.ArrayList;
 import java.util.List;
 

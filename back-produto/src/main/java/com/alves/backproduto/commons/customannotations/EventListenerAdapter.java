@@ -8,6 +8,6 @@ import java.lang.annotation.*;
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
 @Component
-public @interface EventListener {
+public @interface EventListenerAdapter {
     String value() default "";
 }
